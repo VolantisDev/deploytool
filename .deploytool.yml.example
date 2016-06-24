@@ -1,0 +1,12 @@
+default:
+  ssh:
+    privateKeyDir: ~/.ssh
+    privateKey: id_rsa
+    privateKeyCI: id_rsa-CI
+production:
+  type: ssh
+  branch: production
+  remoteDir: /var/www/html
+  host: domain.com
+  ssh:
+    username: www

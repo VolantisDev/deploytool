@@ -1,0 +1,40 @@
+{
+  "name": "deploytool",
+  "version": "0.0.1",
+  "description": "A Node tool for deploying things to remote servers and services",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bmcclure/deploytool"
+  },
+  "author": {
+    "name": "Ben McClure",
+    "email": "ben.mcclure@gmail.com",
+    "url": "http://benmcclure.com"
+  },
+  "files": [
+    "index.js",
+    "lib"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "vinyl",
+    "gulp",
+    "ftp",
+    "deploy",
+    "deployment",
+    "upload"
+  ],
+  "dependencies": {
+    "async": "^2.0.0-rc.6",
+    "sequest": "^0.9.0"
+  },
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
+}
