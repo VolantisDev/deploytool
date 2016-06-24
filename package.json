@@ -1,6 +1,6 @@
 {
   "name": "deploytool",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A Node tool for deploying things like code to places like remote servers and services",
   "license": "MIT",
   "repository": {
