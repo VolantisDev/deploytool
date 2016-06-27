@@ -3,46 +3,37 @@
  */
 
 var use = require('use-plugin')({
-  module: module,
-  prefix: 'deploytool',
-  builtin: 'lib'
+  "module": module,
+  "prefix": 'deploytool',
+  "builtin": './plugins'
 });
 
-var deploytoolEnvironment = require('./lib/environment');
+var plugins = {};
+
+module.exports = {};
 
 function usePlugin(pluginName) {
+  if (plugins[pluginName]) {
+    return plugins[pluginName];
+  }
+
   var pluginDescription = use(pluginName);
 
   pluginDescription.init();
 
+  plugins[pluginName] = pluginDescription;
+
   return pluginDescription;
 }
 
-function deploy(environment, commit, callback) {
-  environment = deploytoolEnvironment.init(environment, {
-    type: '',
-    branch: ''
-  });
+// Set up exposed utility functions
+module.exports.use = usePlugin;
+module.exports.cmd = require('./lib/cmd');
+module.exports.cmdList = require('./lib/cmd-list');
+module.exports.cmdList = require('./lib/environment');
+module.exports.firstCommit = require('./lib/first-commit');
+module.exports.previousCommit = require('./lib/previous-commit');
 
-  environment.validate(['type', 'branch'], function (error) {
-    if (error) {
-      callback(error);
-
-      return;
-    }
-
-    var plugin = usePlugin(environment.config.type);
-
-    require(plugin.requirepath).deploy(environment, commit, callback);
-  });
-}
-
-module.exports = {
-  cmd: require('./lib/cmd'),
-  cmdList: require('./lib/cmd-list'),
-  deploy: deploy,
-  environment: deploytoolEnvironment,
-  firstCommit: require('./lib/first-commit'),
-  previousCommit: require('./lib/previous-commit'),
-  use: usePlugin
-};
+// Load core plugins
+var deployPlugin = usePlugin("deploy");
+module.exports.deploy = require(deployPlugin.requirepath).deploy;

@@ -1,6 +1,6 @@
 {
   "name": "deploytool",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A Node tool for deploying things like code to places like remote servers and services",
   "license": "MIT",
   "repository": {
@@ -25,10 +25,10 @@
   "keywords": [],
   "dependencies": {
     "async": "^2.0.0-rc.6",
+    "eraro": "^0.4.1",
     "node-yaml-config": "0.0.4",
     "object-assign": "^4.1.0",
-    "use-plugin": "^0.3.1",
-    "eraro": "^0.4.1"
+    "use-plugin": "^0.3.1"
   },
   "devDependencies": {
     "mocha": "^2.5.3"

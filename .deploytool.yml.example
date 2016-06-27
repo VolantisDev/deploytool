@@ -1,6 +1,5 @@
 default:
   ssh:
-    privateKeyDir: ~/.ssh
     privateKey: id_rsa
     privateKeyCI: id_rsa-CI
 production:
