@@ -37,7 +37,21 @@ module.exports = {
         return;
       }
 
-      require(plugin.requirepath).deploy(environment, commit, callback);
+      require(plugin.requirepath).deploy(environment, commit, function (error, result) {
+        if (!error && commit) {
+          var deployed = new deploytool.deployed(environment.config);
+
+          deployed.write(function (err, ref) {
+            if (err) {
+              console.error('Could not write .deployed file');
+            }
+            
+            callback(error, result);
+          });
+        } else {
+          callback(error, result);
+        }
+      });
     });
   }
 };

@@ -30,9 +30,9 @@ function usePlugin(pluginName) {
 module.exports.use = usePlugin;
 module.exports.cmd = require('./lib/cmd');
 module.exports.cmdList = require('./lib/cmd-list');
+module.exports.deployed = require('./lib/deployed');
 module.exports.cmdList = require('./lib/environment');
 module.exports.firstCommit = require('./lib/first-commit');
-module.exports.previousCommit = require('./lib/previous-commit');
 
 // Load core plugins
 var deployPlugin = usePlugin("deploy");
