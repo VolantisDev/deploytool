@@ -10,9 +10,7 @@ var use = require('use-plugin')({
 
 var plugins = {};
 
-module.exports = {};
-
-function usePlugin(pluginName) {
+module.exports.use = function (pluginName) {
   if (plugins[pluginName]) {
     return plugins[pluginName];
   }
@@ -24,16 +22,13 @@ function usePlugin(pluginName) {
   plugins[pluginName] = pluginDescription;
 
   return pluginDescription;
-}
+};
 
 // Set up exposed utility functions
-module.exports.use = usePlugin;
 module.exports.cmd = require('./lib/cmd');
-module.exports.cmdList = require('./lib/cmd-list');
 module.exports.deployed = require('./lib/deployed');
 module.exports.cmdList = require('./lib/environment');
-module.exports.firstCommit = require('./lib/first-commit');
+module.exports.git = require('./lib/git');
 
-// Load core plugins
-var deployPlugin = usePlugin("deploy");
-module.exports.deploy = require(deployPlugin.requirepath).deploy;
+// This file contains a circular reference to deploytool to access deploytool.use, so load it last
+module.exports.deploy = require('./lib/deploy');
