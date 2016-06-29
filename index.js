@@ -2,33 +2,16 @@
  * @author bmcclure
  */
 
-var use = require('use-plugin')({
-  "module": module,
-  "prefix": 'deploytool',
-  "builtin": './plugins'
-});
+var pluginManager = require('./lib/plugin-manager');
 
-var plugins = {};
+pluginManager.scan();
 
-module.exports.use = function (pluginName) {
-  if (plugins[pluginName]) {
-    return plugins[pluginName];
-  }
-
-  var pluginDescription = use(pluginName);
-
-  pluginDescription.init();
-
-  plugins[pluginName] = pluginDescription;
-
-  return pluginDescription;
+module.exports = {
+  plugins: pluginManager,
+  cmd: require('./lib/cmd'),
+  deploy: require('./lib/deploy'),
+  environment: require('./lib/environment'),
+  error: require('./lib/error'),
+  source: require('./lib/source'),
+  version: require('./lib/version')
 };
-
-// Set up exposed utility functions
-module.exports.cmd = require('./lib/cmd');
-module.exports.deployed = require('./lib/deployed');
-module.exports.cmdList = require('./lib/environment');
-module.exports.git = require('./lib/git');
-
-// This file contains a circular reference to deploytool to access deploytool.use, so load it last
-module.exports.deploy = require('./lib/deploy');

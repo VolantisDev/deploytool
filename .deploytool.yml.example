@@ -1,11 +1,17 @@
 default:
+  source: git
+  versioning: git
   ssh:
     privateKey: id_rsa
     privateKeyCI: id_rsa-CI
 production:
-  type: ssh
+  type: git-push
   branch: production
-  remoteDir: /var/www/html
+  remote: git@github.com:username/repo.git
+development:
+  type: ssh
+  branch: master
+  remoteDir: /var/www/
   host: domain.com
   ssh:
     username: www
