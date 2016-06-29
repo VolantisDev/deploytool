@@ -2,9 +2,9 @@
  * @author bmcclure
  */
 
-var pluginManager = require('./lib/plugin-manager');
+var pluginManager = require('./lib/plugin-manager')
 
-pluginManager.scan();
+pluginManager.scan()
 
 module.exports = {
   plugins: pluginManager,
@@ -14,4 +14,4 @@ module.exports = {
   error: require('./lib/error'),
   source: require('./lib/source'),
   version: require('./lib/version')
-};
+}
