@@ -5,24 +5,25 @@
 var deploytool = require('../')
 
 module.exports = {
-  deploy: function (environment, commit, callback) {
+  requires: {
+    source: "git"
+  },
+  deploy: function (environment) {
     environment = deploytool.environment.init(environment, {
-      type: 'git-push',
-      remote: 'origin'
+      type: 'git-push'
     })
 
-    var config = environment.config
-    var ref = config.branch
+    var ref = environment.config.branch
 
-    if (commit) {
-      ref = commit + ':' + ref
+    if (environment.config.commit) {
+      ref = environment.config.commit + ':' + ref
     }
 
     var commands = [
       'git fetch',
-      'git push ' + config.remote + ' ' + ref
+      'git push ' + environment.config.remote + ' ' + ref
     ]
 
-    deploytool.cmd.cmdList(commands, callback)
+    return deploytool.cmd.cmdList(commands)
   }
 }

@@ -2,9 +2,12 @@
  * @author bmcclure
  */
 
-var debug = process.env.DEBUG || false // Change to false for production
+var debug = process.env.DEBUG || false
 var verbose = process.env.VERBOSE || false
 var pluginManager = require('./lib/plugin-manager')
+
+var Notify = require('./lib/notify')
+Notify.setDefaults(process.env.NOTIFY_PLUGIN.split(',') || ['console'])
 
 module.exports = {
   debug: debug,
@@ -13,7 +16,7 @@ module.exports = {
   cmd: require('./lib/cmd'),
   deploy: require('./lib/deploy'),
   environment: require('./lib/environment'),
-  notify: require('./lib/notify'),
+  notify: new Notify(),
   source: require('./lib/source'),
   version: require('./lib/version')
 }

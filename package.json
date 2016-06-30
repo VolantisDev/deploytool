@@ -21,6 +21,9 @@
     "deploytool:deployment": {
       "git-push": "./plugin/git-push"
     },
+    "deploytool:notify": {
+      "console": "./plugin/console"
+    },
     "deploytool:source": {
       "directory": "./plugin/directory",
       "git": "./plugin/git"

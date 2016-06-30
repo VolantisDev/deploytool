@@ -2,6 +2,7 @@
  * Created by Ben on 6/27/2016.
  */
 
+var Promise = require('bluebird')
 var deploytool = require('../')
 var objectAssign = require('object-assign')
 var File = require('vinyl')
@@ -17,24 +18,26 @@ var defaults = {
 module.exports = {
   /**
    * @param {{commit:string}} config
-   * @param callback
      */
-  currentVersion: function (config, callback) {
-    config = objectAssign(defaults, config)
+  currentVersion: function (config) {
+    return new Promise(function (resolve, reject) {
+      config = objectAssign(defaults, config)
 
-    var error = config.commit ? null : new Error('Could not find commit')
-
-    callback(error, config.commit)
+      if (config.commit) {
+        resolve(config.commit)
+      } else {
+        reject(new Error('Could not find current commit'))
+      }
+    })
   },
 
   /**
    * @param {{branch:string}} config
-   * @param callback
      */
-  firstVersion: function (config, callback) {
+  firstVersion: function (config) {
     config = objectAssign(defaults, config)
 
-    deploytool.cmd.exec('git rev-list --max-parents=0 ' + config.branch, callback)
+    return deploytool.cmd.execute('git rev-list --max-parents=0 ' + config.branch)
   },
 
   /**
@@ -43,6 +46,7 @@ module.exports = {
      */
   getVinyl: function (config) {
     config = objectAssign(defaults, config)
+
     return new File({ cwd: config.directory })
   }
 }

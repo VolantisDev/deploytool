@@ -8,6 +8,10 @@ var File = require('vinyl')
 var defaults = { directory: __dirname }
 
 module.exports = {
+  /**
+   * @param {{directory:string}} config
+   * @returns {File}
+     */
   getVinyl: function (config) {
     config = objectAssign(defaults, config)
 
