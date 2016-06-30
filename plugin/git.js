@@ -6,7 +6,13 @@ var deploytool = require('../')
 var objectAssign = require('object-assign')
 var File = require('vinyl')
 
-var defaults = { deployString: '', branch: 'master', commit: '', directory: __dirname }
+var defaults = {
+  deployString: '',
+  branch: 'master',
+  remote: 'origin',
+  commit: '',
+  directory: __dirname
+}
 
 module.exports = {
   /**

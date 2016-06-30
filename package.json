@@ -37,11 +37,11 @@
   },
   "keywords": [],
   "dependencies": {
-    "async": "^2.0.0-rc.6",
+    "bluebird": "^3.4.1",
+    "child-process-promise": "^2.0.3",
     "eraro": "^0.4.1",
     "is-stream": "^1.1.0",
     "js-plugins": "0.0.3",
-    "node-yaml-config": "0.0.4",
     "object-assign": "^4.1.0",
     "vinyl": "^1.1.1"
   },
